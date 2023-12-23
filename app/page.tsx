@@ -34,7 +34,7 @@ export default function Home() {
       <h1 className="text-4xl p-5">The purpose of this domain is undecided.<br></br><b className="text-4xl">Have some <a href="https://knowyourmeme.com/memes/padoru" target="_blank" className="underline" >Padoru</a> for now!</b></h1>
 
       <div className="p-5">
-        <a href="https://soundcloud.com/iamazure/padoru-azure-projects-half-baked-remix" target="_blank" className="underline">Padoru (Azure Project's Half - Baked Remix)</a>
+        <a href="https://soundcloud.com/iamazure/padoru-azure-projects-half-baked-remix" target="_blank" className="underline">Padoru (Azure Project&apos;s Half - Baked Remix)</a>
         <br></br>
         <audio src="/audio/Padoru_Azure_Project_Half-baked_Remix.mp3" id="padoru-audio" loop />
         <input id="audio-control" defaultValue="0.5" type="range" min="0" max="1" step="0.01" onChange={(e) => {
