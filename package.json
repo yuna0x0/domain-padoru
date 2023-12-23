@@ -19,7 +19,7 @@
   "author": "Edison Lee <edisonlee@edisonlee55.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/edisonlee55/edisonlee55-padoru.git"
+    "url": "https://github.com/edisonlee55/domain-padoru.git"
   },
   "dependencies": {
     "next": "14.0.4",
