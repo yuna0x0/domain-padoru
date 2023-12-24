@@ -18,11 +18,11 @@ export default function Home() {
       ...edisonlee55Padoru!.initialState,
       i: 0.0075,
       d: 0.9999,
-      r: 40
+      r: 30
     };
     SakanaWidget.registerCharacter('edisonlee55 Padoru', edisonlee55Padoru!);
     new SakanaWidget({
-      size: 450,
+      size: 175,
       controls: false,
       character: 'edisonlee55 Padoru',
       rod: false
@@ -58,7 +58,7 @@ export default function Home() {
       <br></br>
 
       <div>
-        {!isAudioPlaying && <Image src="https://cdn.edisonlee55.com/edisonlee55/resources/photo/edisonlee55_padoru_t.webp" width="450" height="450" alt="edisonlee55 Padoru" priority />}
+        {!isAudioPlaying && <Image src="https://cdn.edisonlee55.com/edisonlee55/resources/photo/edisonlee55_padoru_t.webp" width="175" height="175" alt="edisonlee55 Padoru" priority />}
       </div>
       <div id="sakana-widget"></div>
 
