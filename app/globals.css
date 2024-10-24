@@ -3,25 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-color-oklch: 0% 0 0;
+  --background-color-oklch: 23.64% 0.0045 248.02;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-color-oklch: 100% 3.5594404384177905e-8 106.37411429114086;
+    --background-color-oklch: 23.64% 0.0045 248.02;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: oklch(var(--foreground-color-oklch));
+  background-color: oklch(var(--background-color-oklch));
 }
