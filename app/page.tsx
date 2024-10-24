@@ -6,25 +6,26 @@ import SakanaWidget from 'sakana-widget';
 
 export default function Home() {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const yunaPadoruImg = `https://yuna0x0.com/yunaPadoru.webp`;
 
   useEffect(() => {
     if (!isAudioPlaying) {
       (document.querySelector('#sakana-widget') as HTMLDivElement).innerHTML = '';
       return;
     }
-    const edisonlee55Padoru = SakanaWidget.getCharacter('chisato');
-    edisonlee55Padoru!.image = `https://cdn.edisonlee55.com/edisonlee55/resources/photo/edisonlee55_padoru_t.webp`;
-    edisonlee55Padoru!.initialState = {
-      ...edisonlee55Padoru!.initialState,
+    const yunaPadoru = SakanaWidget.getCharacter('chisato');
+    yunaPadoru!.image = yunaPadoruImg;
+    yunaPadoru!.initialState = {
+      ...yunaPadoru!.initialState,
       i: 0.0075,
       d: 0.9999,
       r: 30
     };
-    SakanaWidget.registerCharacter('edisonlee55 Padoru', edisonlee55Padoru!);
+    SakanaWidget.registerCharacter('yunaPadoru', yunaPadoru!);
     new SakanaWidget({
       size: 175,
       controls: false,
-      character: 'edisonlee55 Padoru',
+      character: 'yunaPadoru',
       rod: false
     }).mount('#sakana-widget');
   });
@@ -58,11 +59,11 @@ export default function Home() {
       <br></br>
 
       <div>
-        {!isAudioPlaying && <Image src="https://cdn.edisonlee55.com/edisonlee55/resources/photo/edisonlee55_padoru_t.webp" width="175" height="175" alt="edisonlee55 Padoru" priority />}
+        {!isAudioPlaying && <Image src={yunaPadoruImg} width="175" height="175" alt="yuna0x0 Padoru" priority />}
       </div>
       <div id="sakana-widget"></div>
 
-      <footer className="p-5">If you know what this domain can be, drop a warm message to <a href="https://www.edisonlee55.com" target="_blank" className="underline">edisonlee55</a>! &lt;3</footer>
+      <footer className="p-5">If you know what this domain can be, drop a warm message to <a href="https://yuna0x0.com" target="_blank" className="underline">yuna0x0</a> :3</footer>
     </main>
   )
 }

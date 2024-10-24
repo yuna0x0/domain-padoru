@@ -1,7 +1,7 @@
 {
   "name": "domain-padoru",
   "version": "0.1.0",
-  "description": "For edisonlee55 domain parking. Padoru Padoru~",
+  "description": "For yuna0x0 domain parking. Padoru Padoru~",
   "keywords": [
     "nextjs",
     "typescript",
@@ -16,27 +16,27 @@
     "lint": "next lint"
   },
   "license": "MIT",
-  "author": "Edison Lee <edisonlee@edisonlee55.com",
+  "author": "yuna0x0 <yuna@yuna0x0.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/edisonlee55/domain-padoru.git"
+    "url": "https://github.com/yuna0x0/domain-padoru.git"
   },
   "dependencies": {
-    "next": "14.0.4",
+    "next": "15.0.1",
     "react": "^18",
     "react-dom": "^18",
     "sakana-widget": "^2.7.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.8.2",
-    "@types/node": "^20",
+    "@cloudflare/next-on-pages": "^1.13.5",
+    "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9",
+    "eslint-config-next": "15.0.1",
     "postcss": "^8",
-    "tailwindcss": "^3.3.0",
+    "tailwindcss": "^3.4.14",
     "typescript": "^5"
   }
 }
