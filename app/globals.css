@@ -4,7 +4,7 @@
 
 :root {
   --foreground-color-oklch: 0% 0 0;
-  --background-color-oklch: 23.64% 0.0045 248.02;
+  --background-color-oklch: 98.48% 0 0;
 }
 
 @media (prefers-color-scheme: dark) {
