@@ -3,22 +3,26 @@ export const validateUmamiEnv = () => {
     return false;
   }
 
-  const ids = process.env.NEXT_PUBLIC_UMAMI_IDS;
-  const domains = process.env.NEXT_PUBLIC_UMAMI_DOMAINS;
+  const sites = process.env.NEXT_PUBLIC_UMAMI_SITES;
 
-  if (!ids || !domains) {
+  if (!sites) {
     return false;
   }
 
-  const idList = ids.split(",").map((id) => id.trim());
-  const domainList = domains.split(",").map((domain) => domain.trim());
+  const siteConfigs = sites.split(",").map((site) => site.trim());
 
-  if (idList.length !== domainList.length) {
-    throw new Error("Number of IDs and domains must match");
+  if (siteConfigs.length === 0) {
+    return false;
   }
 
-  if (idList.length === 0) {
-    return false;
+  // Validate format (domain:id)
+  const isValidFormat = siteConfigs.every((site) => {
+    const parts = site.split(":");
+    return parts.length === 2 && parts[0].length > 0 && parts[1].length > 0;
+  });
+
+  if (!isValidFormat) {
+    throw new Error("Invalid site configuration format. Expected: domain:id");
   }
 
   return true;

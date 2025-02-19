@@ -11,17 +11,16 @@ export const parseUmamiConfig = (): UmamiDomainConfig[] => {
     }
 
     const scriptUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL!;
-    const ids = process.env.NEXT_PUBLIC_UMAMI_IDS!;
-    const domains = process.env.NEXT_PUBLIC_UMAMI_DOMAINS!;
+    const sites = process.env.NEXT_PUBLIC_UMAMI_SITES!;
 
-    const idList = ids.split(",").map((id) => id.trim());
-    const domainList = domains.split(",").map((domain) => domain.trim());
-
-    return idList.map((websiteId, index) => ({
-      websiteId,
-      scriptUrl,
-      domains: [domainList[index]],
-    }));
+    return sites.split(",").map((site) => {
+      const [domain, websiteId] = site.trim().split(":");
+      return {
+        websiteId,
+        scriptUrl,
+        domains: [domain],
+      };
+    });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
       console.error("Umami configuration error:", error);
@@ -33,7 +32,8 @@ export const parseUmamiConfig = (): UmamiDomainConfig[] => {
 export const getUmamiConfig = (domain: string): UmamiDomainConfig | null => {
   const configs = parseUmamiConfig();
   return (
-    configs.find((config) => config.domains.some((d) => domain.includes(d))) ||
-    null
+    configs.find((config) =>
+      config.domains.some((d) => d.toLowerCase() === domain.toLowerCase()),
+    ) || null
   );
 };
