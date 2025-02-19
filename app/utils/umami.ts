@@ -1,27 +1,27 @@
-import { UmamiDomainConfig } from "../types/umami";
-import { validateUmamiEnv } from "./env-validation";
+export interface UmamiSite {
+  domain: string;
+  websiteId: string;
+}
 
-export const parseUmamiConfig = (): UmamiDomainConfig[] => {
-  try {
-    if (!validateUmamiEnv()) {
-      if (process.env.NODE_ENV === "development") {
-        console.log("Umami analytics is disabled (no configuration)");
-      }
-      return [];
+export const parseUmamiConfig = (): UmamiSite[] => {
+  const scriptUrl = process.env.UMAMI_SCRIPT_URL;
+  const sitesString = process.env.UMAMI_SITES;
+
+  if (!scriptUrl || !sitesString) {
+    if (process.env.NODE_ENV === "development") {
+      console.log("Umami analytics is disabled (missing configuration)");
     }
+    return [];
+  }
 
-    const scriptUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL!;
-    const ids = process.env.NEXT_PUBLIC_UMAMI_IDS!;
-    const domains = process.env.NEXT_PUBLIC_UMAMI_DOMAINS!;
-
-    const idList = ids.split(",").map((id) => id.trim());
-    const domainList = domains.split(",").map((domain) => domain.trim());
-
-    return idList.map((websiteId, index) => ({
-      websiteId,
-      scriptUrl,
-      domains: [domainList[index]],
-    }));
+  try {
+    return sitesString.split(",").map((siteString) => {
+      const [domain, websiteId] = siteString.trim().split(":");
+      if (!domain || !websiteId) {
+        throw new Error(`Invalid site configuration: ${siteString}`);
+      }
+      return { domain, websiteId };
+    });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
       console.error("Umami configuration error:", error);
@@ -30,10 +30,7 @@ export const parseUmamiConfig = (): UmamiDomainConfig[] => {
   }
 };
 
-export const getUmamiConfig = (domain: string): UmamiDomainConfig | null => {
-  const configs = parseUmamiConfig();
-  return (
-    configs.find((config) => config.domains.some((d) => domain.includes(d))) ||
-    null
-  );
+export const getUmamiConfig = (domain: string): UmamiSite | null => {
+  const sites = parseUmamiConfig();
+  return sites.find((site) => domain.includes(site.domain)) || null;
 };

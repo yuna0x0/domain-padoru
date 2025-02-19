@@ -1,5 +1,4 @@
-export interface UmamiDomainConfig {
+export interface UmamiSite {
+  domain: string;
   websiteId: string;
-  scriptUrl: string;
-  domains: string[];
 }

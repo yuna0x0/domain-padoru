@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 import type { Metadata } from "next";
-import { UmamiAnalytics } from "./components/UmamiAnalytics";
 import "./globals.css";
 
 const Avenir = localFont({ src: "./fonts/Avenir.woff2" });
@@ -16,10 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={Avenir.className}>
-        {children}
-        <UmamiAnalytics />
-      </body>
+      <head>
+        <script async defer src="/umami" type="text/javascript" />
+      </head>
+      <body className={Avenir.className}>{children}</body>
     </html>
   );
 }
