@@ -1,6 +1,8 @@
 import { headers } from "next/headers";
 import { getUmamiConfig } from "../utils/umami";
 
+export const runtime = "edge";
+
 export async function GET() {
   const headersList = await headers();
   const host = headersList.get("host") || "";
