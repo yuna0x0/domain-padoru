@@ -4,24 +4,25 @@ export interface UmamiSite {
 }
 
 export const parseUmamiConfig = (): UmamiSite[] => {
-  const scriptUrl = process.env.UMAMI_SCRIPT_URL;
-  const sitesString = process.env.UMAMI_SITES;
-
-  if (!scriptUrl || !sitesString) {
-    if (process.env.NODE_ENV === "development") {
-      console.log("Umami analytics is disabled (missing configuration)");
-    }
-    return [];
-  }
-
   try {
-    return sitesString.split(",").map((siteString) => {
-      const [domain, websiteId] = siteString.trim().split(":");
-      if (!domain || !websiteId) {
-        throw new Error(`Invalid site configuration: ${siteString}`);
-      }
-      return { domain, websiteId };
-    });
+    const sites = Object.entries(process.env)
+      .filter(([key]) => key.startsWith("UMAMI_SITE_"))
+      .map(([_, value]) => {
+        if (!value) return null;
+
+        const [domain, websiteId] = value.trim().split(":");
+        if (!domain || !websiteId) {
+          throw new Error(`Invalid site configuration: ${value}`);
+        }
+        return { domain, websiteId };
+      })
+      .filter((site): site is UmamiSite => site !== null);
+
+    if (sites.length === 0 && process.env.NODE_ENV === "development") {
+      console.log("Umami analytics is disabled (no configuration)");
+    }
+
+    return sites;
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
       console.error("Umami configuration error:", error);
